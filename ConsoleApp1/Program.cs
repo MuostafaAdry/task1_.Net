@@ -20,7 +20,10 @@ namespace ConsoleApp1
             //store the total after adding the saleTax
             double Sum_saleTax = (Sum * saleTax);
 
-            Console.WriteLine($" and the totla is {Sum_saleTax + Sum} there is 6% for taxe");
+            Console.WriteLine($" and the totla is  {Sum_saleTax + Sum } $ there is 6% for taxe");
+
+            //ليه مظهرش علامه$ 
+            //Console.WriteLine($"Equation: {Sum_saleTax + Sum} = {Sum_saleTax + Sum : C}");
 
         }
     }
