@@ -1,114 +1,125 @@
-﻿namespace ConsoleApp1
+﻿using System.Buffers;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+
+namespace ConsoleApp1
 {
     internal class Program
     {
-        static void Main(string[] args)
+
+
+        //handel add number 
+        static void HandelAddNumber()
         {
-            List<int> MyList = new List<int>();
+            Environment.Exit(0);
 
-            if (MyList.Count == 0)
+        }
+        //add values in the list
+        static void AddValues(List<int> list, int count)
+        {
+            for (int i = 1; i <= count; i++)
             {
-                Console.WriteLine("Your list is empty.");
-            }
-
-            while (true)
-            {
-                Console.WriteLine("Enter even values (press 0 to stop):");
-                int listValues = int.Parse(Console.ReadLine());
-                // new feature for bouns ==> you con add even number only
-                if (listValues % 2 == 0)
+                Console.WriteLine($"enter the values number {i}");
+                int eachValue = int.Parse(Console.ReadLine());
+                //this feature for bouns allow user to enter even number only and stop the task is he enter the add number 
+                if (eachValue % 2 == 0)
                 {
-                  //to add any number != zero علشان مياثرش على average & min value
-                    if (listValues != 0)
-                    {
-                        MyList.Add(listValues);
-                    }
+                    list.Add(eachValue);
                 }
                 else
                 {
-                    Console.WriteLine("Enter EVEN NUMBER ONLY. Try again.");
-                    MyList.Clear();
+                    Console.WriteLine("enter EVEN number only try again");
+                    HandelAddNumber();
                 }
-                //handel min & max value and average
 
-                if (listValues == 0)
+
+            }
+        }
+        //handel display list 
+        static void DIspayList(List<int> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                Console.WriteLine($"the value is {list[i]}");
+            }
+
+        }
+        // FindType max and min values in the list
+        static void MaxandMinValues(List<int> list)
+        {
+            int max = list[0];
+            int min = list[0];
+
+            for (int i = 0; i < list.Count; i++)
+            {
+
+                if (list[i] > max)
                 {
-                    if (MyList.Count > 0)
-                    {
-                        int minValue = MyList[0];
-                        int maxValue = MyList[0];
-                        double theAverage = 0.0;
+                    max = list[i];
 
-                        for (int i = 0; i < MyList.Count; i++)
-                        {
-                            Console.WriteLine($"The values in the list are ===> {MyList[i]}");
-                            theAverage +=  MyList[i] / MyList.Count;
-
-                            if (maxValue < MyList[i])
-                            {
-                                maxValue = MyList[i];
-                            }
-
-                            if (minValue > MyList[i])
-                            {
-                                minValue = MyList[i];
-                            }
-                        }
-
-                        Console.WriteLine("=========================================");
-                        Console.WriteLine($"The average is {theAverage}");
-                        Console.WriteLine("=========================================");
-                        Console.WriteLine($"The min value is {minValue}");
-                        Console.WriteLine("=========================================");
-                        Console.WriteLine($"The max value is {maxValue}");
-                    }
-                    //else
-                    //{
-                    //    Console.WriteLine("Your list is empty.");
-                    //}
+                }
+                else if (list[i] < min)
+                {
+                    min = list[i];
+                }
 
 
+            }
 
-                    //handel search value
-                    Console.WriteLine("Enter the search value:");
-                    int userSearch = int.Parse(Console.ReadLine());
-                     
+            Console.WriteLine($"Maximum Value: {max}");
+            Console.WriteLine($"Minimum Value: {min}");
+        }
 
-                    for (int j = 0; j < MyList.Count; j++)
-                    {
-                        if (userSearch == MyList[j])
-                        {
-                            Console.WriteLine($"Your value already exists in the list ===> {userSearch} with index ===> {j}");
-                            
-                            break;
-                        }
- 
-                        else if (userSearch % 2 != 0)
-                        {
-                            Console.WriteLine("Your search is an ODD number. This list accepts EVEN numbers only.");
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Your value does NOT exist.");
-                            break;
-                        }
-                    }
-
-
-                    //handel delet values from list
-                    Console.WriteLine("Enter 'd' to delete all values:");
-                    string dletValues = Console.ReadLine();
-
-                    if (dletValues == "d")
-                    {
-                        MyList.Clear();
-                        Console.WriteLine("All values are deleted.");
-                    }
-
+        //handel Search value 
+        static void SearchValue(List<int> list)
+        {
+            int searchValue = 0;
+            Console.WriteLine("Enter the search value :");
+            searchValue = int.Parse(Console.ReadLine());
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (searchValue == list[i])
+                {
+                    searchValue = list[i];
+                    Console.WriteLine($"the {searchValue} exist in the list ");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine($"the {searchValue} NOT exist in the list ");
                     break;
                 }
             }
+
+        }
+
+        //handel clear list 
+        static void ClrearList(List<int> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                list.Clear();
+                Console.WriteLine("your list is empty");
+
+            }
+
+        }
+
+
+
+
+        static void Main(string[] args)
+        {
+            List<int> list = new List<int>() { };
+            Console.WriteLine("enter the lenght of loop");
+            int count = int.Parse(Console.ReadLine());
+
+            AddValues(list, count);
+            DIspayList(list);
+            MaxandMinValues(list);
+            SearchValue(list);
+            ClrearList(list);
+
         }
     }
 }
